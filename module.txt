@@ -1,0 +1,9 @@
+{
+    "id" : "TelemetryApiTest",
+    "version" : "0.1.0-SNAPSHOT",
+    "author" : "",
+    "displayName" : "TelemetryApiTest",
+    "description" : "",
+    "dependencies" : [],
+    "serverSideOnly" : false
+}
