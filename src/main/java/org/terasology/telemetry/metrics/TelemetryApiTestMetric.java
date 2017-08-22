@@ -35,14 +35,13 @@ public class TelemetryApiTestMetric extends Metric {
     @TelemetryField
     private String testField;
 
-    public TelemetryApiTestMetric(Context context) {
-        super(context);
+    public TelemetryApiTestMetric() {
         testField = "for test";
     }
 
     public Unstructured getUnstructuredMetric() {
-        getFieldValueMap();
-        SelfDescribingJson systemContextData = new SelfDescribingJson(SCHEMA_TELEMETRY_API, metricMap);
+        createTelemetryFieldToValue();
+        SelfDescribingJson systemContextData = new SelfDescribingJson(SCHEMA_TELEMETRY_API, telemetryFieldToValue);
 
         return Unstructured.builder()
                 .eventData(systemContextData)
