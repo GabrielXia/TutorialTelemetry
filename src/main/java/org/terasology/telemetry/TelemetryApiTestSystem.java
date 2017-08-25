@@ -15,17 +15,12 @@
  */
 package org.terasology.telemetry;
 
-import com.snowplowanalytics.snowplow.tracker.emitter.Emitter;
-import com.snowplowanalytics.snowplow.tracker.events.Unstructured;
-import org.terasology.config.Config;
-import org.terasology.config.TelemetryConfig;
+import org.terasology.config.facade.TelemetryConfiguration;
 import org.terasology.context.Context;
 import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.registry.In;
 import org.terasology.telemetry.metrics.TelemetryApiTestMetric;
-
-import java.util.Map;
 
 /**
  * The a component system in module to test telemetry api.
@@ -36,13 +31,13 @@ public class TelemetryApiTestSystem extends BaseComponentSystem {
     private final String trackerNamespace = this.getClass().toString();
 
     @In
-    private Emitter emitter;
-
-    @In
-    private Metrics metrics;
+    private TelemetryConfiguration telemetryConfiguration;
 
     @In
     private Context context;
+
+    @In
+    private Metrics metrics;
 
     private TelemetryApiTestMetric telemetryApiTestMetric;
 
@@ -57,11 +52,8 @@ public class TelemetryApiTestSystem extends BaseComponentSystem {
     }
 
     private void sendTelemetryApiTestMetric() {
-        TelemetryConfig telemetryConfig = context.get(Config.class).getTelemetryConfig();
-        Map<String, Boolean> bindingMap = telemetryConfig.getMetricsUserPermissionConfig().getBindingMap();
-        if (telemetryConfig.isTelemetryEnabled()) {
-            Unstructured unstructured = telemetryApiTestMetric.getUnstructuredMetric();
-            TelemetryUtils.trackMetric(emitter, trackerNamespace, unstructured, telemetryApiTestMetric, bindingMap);
+        if (telemetryConfiguration.isTelemetryEnabled()) {
+            TelemetryUtils.fetchMetricAndSend(metrics, TelemetryApiTestMetric.class, context, trackerNamespace, telemetryConfiguration);
         }
     }
 }
