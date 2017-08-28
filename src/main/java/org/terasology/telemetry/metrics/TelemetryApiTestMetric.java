@@ -20,6 +20,8 @@ import com.snowplowanalytics.snowplow.tracker.payload.SelfDescribingJson;
 import org.terasology.telemetry.TelemetryCategory;
 import org.terasology.telemetry.TelemetryField;
 
+import java.util.Optional;
+
 /**
  * This is the a metric to test the telemetry api used in a module.
  */
@@ -38,12 +40,8 @@ public class TelemetryApiTestMetric extends Metric {
         testField = "for test";
     }
 
-    public Unstructured getUnstructuredMetric() {
+    public Optional<Unstructured> getUnstructuredMetric() {
         createTelemetryFieldToValue();
-        SelfDescribingJson systemContextData = new SelfDescribingJson(SCHEMA_TELEMETRY_API, telemetryFieldToValue);
-
-        return Unstructured.builder()
-                .eventData(systemContextData)
-                .build();
+        return getUnstructuredMetric(SCHEMA_TELEMETRY_API, telemetryFieldToValue);
     }
 }
