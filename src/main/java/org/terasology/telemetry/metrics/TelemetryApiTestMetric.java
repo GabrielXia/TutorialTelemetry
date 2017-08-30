@@ -18,7 +18,6 @@ package org.terasology.telemetry.metrics;
 import com.snowplowanalytics.snowplow.tracker.events.Unstructured;
 import org.terasology.config.facade.TelemetryConfiguration;
 import org.terasology.context.Context;
-import org.terasology.registry.In;
 import org.terasology.telemetry.TelemetryCategory;
 import org.terasology.telemetry.TelemetryField;
 
