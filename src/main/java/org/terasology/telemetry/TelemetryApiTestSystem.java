@@ -43,7 +43,6 @@ public class TelemetryApiTestSystem extends BaseComponentSystem {
 
     @Override
     public void initialise() {
-        telemetryApiTestMetric = new TelemetryApiTestMetric();
     }
 
     @Override

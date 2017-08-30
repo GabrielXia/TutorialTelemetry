@@ -16,17 +16,20 @@
 package org.terasology.telemetry.metrics;
 
 import com.snowplowanalytics.snowplow.tracker.events.Unstructured;
-import com.snowplowanalytics.snowplow.tracker.payload.SelfDescribingJson;
+import org.terasology.config.facade.TelemetryConfiguration;
+import org.terasology.context.Context;
+import org.terasology.registry.In;
 import org.terasology.telemetry.TelemetryCategory;
 import org.terasology.telemetry.TelemetryField;
 
+import java.util.Map;
 import java.util.Optional;
 
 /**
  * This is the a metric to test the telemetry api used in a module.
  */
 @TelemetryCategory(id = "telemetryApiTestMetric",
-        displayName = "telemetryApiTestMetric",
+        displayName = "${TelemetryApiTest:menu#telemetry-api-test}",
         isOneMapMetric = false
 )
 public class TelemetryApiTestMetric extends Metric {
@@ -36,12 +39,21 @@ public class TelemetryApiTestMetric extends Metric {
     @TelemetryField
     private String testField;
 
-    public TelemetryApiTestMetric() {
+    @TelemetryField
+    private String sayHello;
+
+    private Context context;
+
+    public TelemetryApiTestMetric(Context context) {
+        this.context = context;
         testField = "for test";
+        sayHello = "say hello";
     }
 
     public Optional<Unstructured> getUnstructuredMetric() {
         createTelemetryFieldToValue();
-        return getUnstructuredMetric(SCHEMA_TELEMETRY_API, telemetryFieldToValue);
+        TelemetryConfiguration telemetryConfiguration = context.get(TelemetryConfiguration.class);
+        Map<String, Object> filteredMap = filterMetricMap(telemetryConfiguration);
+        return getUnstructuredMetric(SCHEMA_TELEMETRY_API, filteredMap);
     }
 }
