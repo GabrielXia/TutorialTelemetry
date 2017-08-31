@@ -16,10 +16,6 @@
 package org.terasology.telemetry.metrics;
 
 import com.snowplowanalytics.snowplow.tracker.events.Unstructured;
-import org.terasology.entitySystem.entity.EntityRef;
-import org.terasology.logic.players.LocalPlayer;
-import org.terasology.registry.CoreRegistry;
-import org.terasology.telemetry.GamePlayStatsComponent;
 import org.terasology.telemetry.TelemetryCategory;
 import org.terasology.telemetry.TelemetryField;
 
