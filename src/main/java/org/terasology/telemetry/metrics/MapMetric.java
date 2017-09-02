@@ -22,13 +22,13 @@ import org.terasology.telemetry.TelemetryField;
 import java.util.Map;
 import java.util.Optional;
 
-@TelemetryCategory(id = "apiTestMapMetric",
-        displayName = "${TelemetryApiTest:menu#api-test-map}",
+@TelemetryCategory(id = "mapMetric",
+        displayName = "${TutorialTelemetry:menu#map-metric}",
         isOneMapMetric = true
 )
-public class ApiTestMapMetric extends Metric {
+public class MapMetric extends Metric {
 
-    public static final String SCHEMA_API_TEST_MAP = "iglu:org.terasology/telemetryApiTest/jsonschema/1-0-0";
+    public static final String SCHEMA_MAP = "iglu:org.terasology/map/jsonschema/1-0-0";
 
     @TelemetryField
     private Map<String, String> testMap;
@@ -36,12 +36,12 @@ public class ApiTestMapMetric extends Metric {
     @Override
     public Optional<Unstructured> getUnstructuredMetric() {
         createTelemetryFieldToValue();
-        return getUnstructuredMetric(SCHEMA_API_TEST_MAP, telemetryFieldToValue);
+        return getUnstructuredMetric(SCHEMA_MAP, telemetryFieldToValue);
     }
 
     @Override
     public Map<String, ?> createTelemetryFieldToValue() {
-        telemetryFieldToValue.put("the first say", "hello");
+        telemetryFieldToValue.put("the first say", "this is a map metric");
         telemetryFieldToValue.put("the second say", "hi");
         return telemetryFieldToValue;
     }

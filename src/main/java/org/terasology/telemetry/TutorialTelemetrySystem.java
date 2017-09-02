@@ -20,14 +20,14 @@ import org.terasology.context.Context;
 import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.registry.In;
-import org.terasology.telemetry.metrics.ApiTestMapMetric;
-import org.terasology.telemetry.metrics.TelemetryApiTestMetric;
+import org.terasology.telemetry.metrics.MapMetric;
+import org.terasology.telemetry.metrics.NonMapMetric;
 
 /**
  * The a component system in module to test telemetry api.
  */
 @RegisterSystem
-public class TelemetryApiTestSystem extends BaseComponentSystem {
+public class TutorialTelemetrySystem extends BaseComponentSystem {
 
     private final String trackerNamespace = this.getClass().toString();
 
@@ -41,8 +41,8 @@ public class TelemetryApiTestSystem extends BaseComponentSystem {
     @Override
     public void postBegin() {
         if (telemetryConfiguration.isTelemetryEnabled()) {
-            TelemetryUtils.fetchMetricAndSend(context, TelemetryApiTestMetric.class, trackerNamespace);
-            TelemetryUtils.fetchMetricAndSend(context, ApiTestMapMetric.class, trackerNamespace);
+            TelemetryUtils.fetchMetricAndSend(context, NonMapMetric.class, trackerNamespace);
+            TelemetryUtils.fetchMetricAndSend(context, MapMetric.class, trackerNamespace);
         }
     }
 }

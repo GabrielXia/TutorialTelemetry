@@ -1,8 +1,8 @@
 {
-    "id" : "TelemetryApiTest",
+    "id" : "TutorialTelemetry",
     "version" : "0.1.0-SNAPSHOT",
     "author" : "",
-    "displayName" : "TelemetryApiTest",
+    "displayName" : "TutorialTelemetry",
     "description" : "",
     "dependencies" : [],
     "serverSideOnly" : false

@@ -27,13 +27,13 @@ import java.util.Optional;
 /**
  * This is the a metric to test the telemetry api used in a module.
  */
-@TelemetryCategory(id = "telemetryApiTestMetric",
-        displayName = "${TelemetryApiTest:menu#telemetry-api-test}",
+@TelemetryCategory(id = "nonMapMetric",
+        displayName = "${TutorialTelemetry:menu#non-map-metric}",
         isOneMapMetric = false
 )
-public class TelemetryApiTestMetric extends Metric {
+public class NonMapMetric extends Metric {
 
-    public static final String SCHEMA_TELEMETRY_API = "iglu:org.terasology/telemetryApiTest/jsonschema/1-0-0";
+    public static final String SCHEMA_NON_MAP = "iglu:org.terasology/nonMap/jsonschema/1-0-0";
 
     @TelemetryField
     private String testField;
@@ -43,16 +43,16 @@ public class TelemetryApiTestMetric extends Metric {
 
     private Context context;
 
-    public TelemetryApiTestMetric(Context context) {
+    public NonMapMetric(Context context) {
         this.context = context;
-        testField = "for test";
-        sayHello = "say hello";
+        testField = "This is a non map metric";
+        sayHello = "Say hello";
     }
 
     public Optional<Unstructured> getUnstructuredMetric() {
         createTelemetryFieldToValue();
         TelemetryConfiguration telemetryConfiguration = context.get(TelemetryConfiguration.class);
         Map<String, Object> filteredMap = filterMetricMap(telemetryConfiguration);
-        return getUnstructuredMetric(SCHEMA_TELEMETRY_API, filteredMap);
+        return getUnstructuredMetric(SCHEMA_NON_MAP, filteredMap);
     }
 }

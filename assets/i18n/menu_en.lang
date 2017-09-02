@@ -1,4 +1,4 @@
 {
-    "telemetry-api-test": "Telemetry API",
-    "api-test-map": "Telemetry API Map"
+    "map-metric": "Map metric",
+    "non-map-metric": "Non map metric"
 }
